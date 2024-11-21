@@ -40,6 +40,8 @@ dependencies {
   implementation('org.controlsfx:controlsfx:11.2.1')
   implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
   implementation('org.xerial:sqlite-jdbc:3.47.0.0')
+  implementation('org.slf4j:slf4j-api:2.0.0')
+  implementation('org.slf4j:slf4j-simple:2.0.0')
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")

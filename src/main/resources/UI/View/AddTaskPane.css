@@ -1,0 +1,133 @@
+/* :root {
+    --main-bg-color: #f4fdfd;
+    --box-bg-color: #eaf3f3;
+    --box-border-color: #c1caca;
+    --main-fg-color: #EE6C4D;
+    --tran-fg-color: #cc4f34;
+    --deep-fg-color: #7f0000;
+    --main-text-color: #333333;
+    --secd-text-color: #5c5c5c;
+} */
+
+.view_Bakground {
+    -fx-background-color: rgba(193, 202, 202, 0.5);
+}
+
+.view_AddTaskBox {
+    -fx-background-color: #eaf3f3;
+    -fx-background-radius: 20px;
+    -fx-border-color: transparent;
+    -fx-border-radius: 20px;
+    -fx-border-width: 1px;
+    -fx-effect: innershadow(gaussian, rgba(193, 202, 202, 0.5), 7, 0, 0, 2);
+    -fx-alignment: center;
+    -fx-padding: 25px;
+    -fx-spacing: 20px;
+}
+
+.view_TaskInfoBox {
+    -fx-alignment: top-center;
+    -fx-padding: 0px;
+    -fx-spacing: 20px;
+}
+
+.info_TitleField {
+    -fx-background-color: transparent;
+    -fx-text-fill: #333333;
+    -fx-font-size: 28px;
+    -fx-font-family: "Serif";
+}
+
+/* .info_TitleArea .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.info_TitleArea .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+
+.info_TitleArea .scroll-pane .content{
+    -fx-background-color: transparent;
+} */
+
+.info_ddlBox {
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 0 10;
+    -fx-spacing: 10px;
+}
+
+.info_ddlText {
+    -fx-font-family: "Serif";
+    -fx-font-size: 20px;
+}
+
+.info_PropertyBox {
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 0 10;
+    -fx-spacing: 10px;
+}
+
+.prop_ImportantChkBox {
+    -fx-font-size: 17px;
+    -fx-font-family: "Serif";
+    -fx-padding: 5px; 
+}
+
+.prop_ImportantChkBox .box {
+    -fx-background-color: #c1caca;
+    -fx-border-radius: 5px;
+}
+
+.info_DetailTextArea{
+    -fx-background-color: transparent;
+    -fx-text-fill: #333333;
+    -fx-font-size: 18px;
+    -fx-font-family: "Serif";
+}
+
+.info_DetailTextArea .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.info_DetailTextArea .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+.info_DetailTextArea .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+
+.btn_Back {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
+    -fx-text-fill: #7f0000;
+    -fx-font-size: 16px;
+    -fx-font-family: "Serif";
+}
+
+.btn_Back:hover {
+    -fx-text-fill: #7f0000b1;
+}
+
+.btn_Back:pressed {
+    -fx-text-fill: #cc4f34;
+}
+
+.btn_Create {
+    -fx-background-insets: 0;
+    -fx-background-color: #7f0000;
+    -fx-text-fill: #f4fdfd;
+    -fx-font-size: 20px;
+    -fx-font-family: "Serif";
+    -fx-background-radius: 8px;
+}
+
+.btn_Create:hover {
+    -fx-background-color: #7f0000b1;
+}
+
+.btn_Create:pressed {
+    -fx-background-color: #cc4f34;
+}
+

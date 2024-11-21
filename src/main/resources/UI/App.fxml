@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane ?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane fx:id="ApplicationPane" xmlns="http://javafx.com/javafx/21.0.5" xmlns:fx="http://javafx.com/fxml/1">
+    <left>
+        <fx:include source="Menu.fxml"/>
+    </left>
+
+    <center>
+<!--        <fx:include source="View/TwoColumnView.fxml"/>-->
+        <AnchorPane prefHeight="750.0" prefWidth="850.0"/>
+    </center>
+
+</BorderPane>

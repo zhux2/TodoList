@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0"
+            styleClass="view_Background" stylesheets="@TwoColumnView.css"
+            xmlns="http://javafx.com/javafx/21.0.5" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.todolist.todo.Controller.ViewCtrl.TwoColumnController">
+   <HBox layoutX="234.0" layoutY="240.0" prefHeight="650.0" prefWidth="850.0" styleClass="view_HboxTaskArea" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+      <AnchorPane prefHeight="600.0" prefWidth="405.0" styleClass="view_TaskArea">
+         <Text layoutX="170.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unfinished" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="25.0" />
+         <ListView fx:id="unfinishedListView" fixedCellSize="150.0" layoutX="13.0" layoutY="69.0" prefHeight="530.0" prefWidth="400.0" styleClass="view_TaskList" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" />
+      </AnchorPane>
+      <AnchorPane prefHeight="570.0" prefWidth="405.0" styleClass="view_TaskArea">
+         <ListView fx:id="finishedListView" layoutX="13.0" layoutY="63.0" prefHeight="530.0" prefWidth="400.0" styleClass="view_TaskList" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="13.0" />
+         <Text layoutX="170.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Finished" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="25.0" />
+      </AnchorPane>
+   </HBox>
+    <DatePicker fx:id="calendar" editable="false" layoutX="80.0" layoutY="45.0" prefHeight="40.0" prefWidth="140.0" styleClass="kit_DatePicker" stylesheets="@TwoColumnView.css" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="40.0" />
+   <Button fx:id="addTaskBtn" layoutX="761.0" layoutY="52.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="kit_BtnAddTask" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="40.0" />
+   <Button fx:id="deleteTaskBtn" layoutX="703.0" layoutY="52.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="28.0" styleClass="kit_BtnTrashBin" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="40.0" />
+   <AnchorPane fx:id="subPane" prefHeight="750" prefWidth="850" />
+</AnchorPane>

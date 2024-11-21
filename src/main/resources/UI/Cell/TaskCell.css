@@ -1,0 +1,77 @@
+.taskCellPane {
+    -fx-background-color: #f4fdfd;
+    -fx-background-radius: 15px;
+}
+
+.taskCellPane CheckBox .box{
+    -fx-background-color: transparent;
+    -fx-border-color: #7f0000;
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
+.taskCellPane CheckBox:selected .box {
+    -fx-background-color: #EE6C4D;
+}
+
+.taskCellPane CheckBox .mark {
+    -fx-background-color: transparent;
+}
+
+.checkBox .box{
+    -fx-shape: "M 0 0 m -10, 0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0";
+}
+
+.checkBoxImportant .box {
+    -fx-shape: "M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z";
+}
+
+.textFlowVBox {
+    -fx-alignment: center;
+}
+
+.titleFlow {
+    -fx-padding: 20px 5px 5px 5px;
+}
+
+.titleFlow Text{
+    -fx-font-size: 20px;
+    -fx-font-family: "Serif";
+    -fx-fill: #333333;
+}
+
+.ddlFlow {
+    -fx-padding: 5px;
+}
+
+.ddlFlow Text {
+    -fx-font-size: 14px;
+    -fx-font-family: "Serif";
+    -fx-fill: #333333;
+}
+
+.detailFlow{
+    -fx-padding: 0px 5px 15px 5px;
+}
+
+.detailFlow Text {
+    -fx-font-size: 14px;
+    -fx-font-family: "Serif";
+    -fx-fill: #5c5c5c;
+}
+
+.deleteBtn {
+    -fx-background-insets: 0;
+    -fx-background-color: #7f0000;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-shape: "M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z";
+}
+
+.deleteBtn:hover {
+    -fx-background-color: #7f0000b1;
+}
+
+.deleteBtn:pressed {
+    -fx-background-color: #cc4f34;
+}

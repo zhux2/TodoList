@@ -1,0 +1,59 @@
+.view_Background {
+    -fx-background-color: rgba(193, 202, 202, 0.5);
+}
+
+.view_DeleteCheckBox {
+    -fx-background-color: #eaf3f3;
+    -fx-background-radius: 20px;
+    -fx-border-color: transparent;
+    -fx-border-radius: 20px;
+    -fx-border-width: 1px;
+    -fx-effect: innershadow(gaussian, rgba(193, 202, 202, 0.5), 7, 0, 0, 2);
+    -fx-alignment: center;
+    -fx-padding: 30px 25px 25px 25px;
+    -fx-spacing: 20px;
+}
+
+.view_DeleteCheckBox Text {
+    -fx-font-family: "Serif";
+    -fx-font-size: 22px;
+    -fx-fill: #333333;
+}
+
+.view_Background Button {
+    -fx-background-insets: 0;
+    -fx-font-size: 20px;
+    -fx-font-family: "Serif";
+    -fx-background-radius: 8px;
+}
+
+.view_BtnBox {
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}
+
+.btn_Delete {
+    -fx-background-color: #7f0000;
+    -fx-text-fill: #f4fdfd;
+}
+
+.btn_Delete:hover {
+    -fx-background-color: #7f0000b1;
+}
+
+.btn_Delete:pressed {
+    -fx-background-color: #cc4f34;
+}
+
+.btn_Cancel {
+    -fx-background-color: #c1caca;
+    -fx-text-fill: #333333;
+}
+
+.btn_Cancel:hover {
+    -fx-background-color: #c1cacab1;
+}
+
+.btn_Cancel:pressed {
+    -fx-background-color: #eaf3f3;
+}

@@ -1,0 +1,68 @@
+/* :root {
+    --main-bg-color: #f4fdfd;
+    --box-bg-color: #eaf3f3;
+    --box-border-color: #c1caca;
+    --main-fg-color: #EE6C4D;
+    --tran-fg-color: #cc4f34;
+    --deep-fg-color: #7f0000;
+    --main-text-color: #333333;
+    --secd-text-color: #5c5c5c;
+} */
+
+/* @font-face {
+    font-family: "InriaSerifRegular";
+    src: url("/font/InriaSerif-Regular.ttf");
+} */
+
+.menu_MainBoard {
+    -fx-background-color: #f4fdfd;
+    -fx-alignment: center;
+}
+
+.menu_IconBox {
+    -fx-alignment: top_center;
+    -fx-padding: 40 10 10 10;
+    -fx-spacing: 10;
+}
+
+.menu_IconBox FontAwesomeIconView {
+    -fx-fill: #EE6C4D;
+}
+
+.menu_IconBox Text {
+    -fx-fill: #7f0000;
+    -fx-font-size: 2em;
+    -fx-font-family: "Serif";
+}
+
+/* Navigation */
+.menu_NavigateBox {
+    -fx-spacing: 20;
+    -fx-padding: 10 0 10 0;
+    -fx-alignment: top_center;
+}
+
+.menu_NavigateBox Button {
+    -fx-pref-width: 160;
+    -fx-pref-height: 40;
+    -fx-background-color: transparent;
+    -fx-text-fill: #333333;
+    -fx-font-size: 1.7em;
+    -fx-font-family: "Serif";
+    -fx-alignment: top_center;
+    -fx-effect: dropshadow(three-pass-box, #c1caca, 5, 0, 0, 6);
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}
+
+.menu_NavigateBox Button:hover {
+    -fx-text-fill: #5c5c5c;
+    -fx-cursor: hand;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+.menu_DividerLine {
+    -fx-stroke: #c1caca;
+    -fx-stroke-width: 1px;
+}

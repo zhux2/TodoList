@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="view_Background" stylesheets="@TimelineView.css"
+            xmlns="http://javafx.com/javafx/21.0.5" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.todolist.todo.Controller.ViewCtrl.TimelineController">
+   <children>
+      <Text layoutX="269.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="tmp_text" text="haven't done yet" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,151 @@
+/* :root {
+    --main-bg-color: #f4fdfd;
+    --box-bg-color: #eaf3f3;
+    --box-border-color: #c1caca;
+    --main-fg-color: #EE6C4D;
+    --tran-fg-color: #cc4f34;
+    --deep-fg-color: #7f0000;
+    --main-text-color: #333333;
+    --secd-text-color: #5c5c5c;
+} */
+
+.kit_DatePicker {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.kit_DatePicker .text-field {
+    -fx-background-color: transparent;
+    -fx-text-fill: #333333;
+    -fx-font-size: 18px;
+    -fx-font-family: "Serif";
+    -fx-padding: 0px 5px 0px 0px;
+    -fx-alignment: center;
+    -fx-cursor: none;
+}
+
+/* 在 SceneBuilder 中取消勾选 editable 即可让光标消失 */
+
+.kit_DatePicker .arrow-button{
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-alignment: top_center;
+}
+
+.kit_DatePicker .date-picker-popup {
+    -fx-background-color: #eaf3f3;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* 普通日期样式 */
+/* .kit_DatePicker .date-picker-popup .day-cell:filled {
+    -fx-background-color: #eaf3f3;
+    -fx-text-fill: #333333;
+}*/
+
+.kit_DatePicker .arrow {
+    -fx-background-color: #7f0000;  
+    -fx-shape: "M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z";
+    -fx-scale-x: 3.5;                 
+    -fx-scale-y: 3.5;
+}
+
+
+.kit_BtnTrashBin {
+    -fx-background-insets: 0; /* 阻止按钮按下后缩小 */
+    -fx-background-color: #7f0000;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-shape: "M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z";
+}
+
+.kit_BtnTrashBin:hover {
+    -fx-background-color: #7f0000b1;
+}
+
+.kit_BtnTrashBin:pressed {
+    -fx-background-color: #cc4f34;
+}
+
+.kit_BtnAddTask {
+    -fx-background-insets: 0;
+    -fx-background-color: #7f0000;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-shape: "M374.55,369 L377.7,369 L377.7,371 L374.55,371 L374.55,374 L372.45,374 L372.45,371 L369.3,371 L369.3,369 L372.45,369 L372.45,366 L374.55,366 L374.55,369 Z M373.5,378 C368.86845,378 365.1,374.411 365.1,370 C365.1,365.589 368.86845,362 373.5,362 C378.13155,362 381.9,365.589 381.9,370 C381.9,374.411 378.13155,378 373.5,378 L373.5,378 Z M373.5,360 C367.70085,360 363,364.477 363,370 C363,375.523 367.70085,380 373.5,380 C379.29915,380 384,375.523 384,370 C384,364.477 379.29915,360 373.5,360 L373.5,360 Z";
+}
+
+.kit_BtnAddTask:hover {
+    -fx-background-color: #7f0000b1;
+}
+
+.kit_BtnAddTask:pressed {
+    -fx-background-color: #cc4f34;
+}
+
+.view_Background {
+    -fx-background-color: #f4fdfd;
+}
+
+
+.view_HboxTaskArea {
+    -fx-background-color: #f4fdfd;
+    -fx-alignment: center;
+    -fx-padding: 20px;
+    -fx-spacing: 20px;
+}
+
+.view_TaskArea {
+    -fx-alignment: center;
+    -fx-background-color: #eaf3f3;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: transparent;
+    -fx-border-width: 1px;
+    -fx-effect: innershadow(gaussian, rgba(193, 202, 202, 0.5), 7, 0, 0, 2);
+}
+
+.view_TaskArea Text {
+    -fx-font-size: 20px;
+    -fx-fill: #333333;
+    -fx-font-family: "Serif";
+}
+
+.view_TaskList {
+    -fx-background-color: transparent;
+}
+
+.view_TaskList .list-cell {
+    -fx-padding: 0px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 20px 0; 
+}
+
+.view_TaskList .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-min-width: 0;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+    -fx-padding: 0;
+}
+
+.view_TaskList .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-max-height: 0;
+    -fx-min-height: 0;
+    -fx-min-height: 0;
+    -fx-padding: 0;
+}
+
+.view_TaskList .corner {
+    -fx-background-color: transparent;
+    -fx-min-height: 0;
+    -fx-pref-height:0;
+    -fx-max-height: 0;
+}
+
+
+/* .view_TaskList .list-cell */

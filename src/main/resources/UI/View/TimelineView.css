@@ -1,0 +1,19 @@
+/* :root {
+    --main-bg-color: #f4fdfd;
+    --box-bg-color: #eaf3f3;
+    --box-border-color: #c1caca;
+    --main-fg-color: #EE6C4D;
+    --tran-fg-color: #cc4f34;
+    --deep-fg-color: #7f0000;
+    --main-text-color: #333333;
+    --secd-text-color: #5c5c5c;
+} */
+
+.view_Background {
+    -fx-background-color: #f4fdfd;
+}
+
+.tmp_text {
+    -fx-font-size: 30px;
+    -fx-fill: #333333;
+}

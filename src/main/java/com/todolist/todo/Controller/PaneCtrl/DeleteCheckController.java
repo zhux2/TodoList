@@ -3,6 +3,7 @@ package com.todolist.todo.Controller.PaneCtrl;
 import com.todolist.todo.Model.AppModel;
 import com.todolist.todo.Model.Task.TaskPool;
 import com.todolist.todo.Model.View.PaneModel;
+import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -17,11 +18,11 @@ public class DeleteCheckController implements Initializable {
     private final TaskPool taskPool;
 
     @FXML
-    Text promptText;
+    private Text promptText;
     @FXML
-    Button cancelBtn;
+    private Button cancelBtn;
     @FXML
-    Button deleteBtn;
+    private Button deleteBtn;
 
     public  DeleteCheckController() {
         model = AppModel.getInstance().getPaneModel();
@@ -34,6 +35,12 @@ public class DeleteCheckController implements Initializable {
 
         cancelBtn.setOnAction(actionEvent -> onBtnCancel());
         deleteBtn.setOnAction(actionEvent -> onBtnDelete());
+        model.deleteCheckingProperty().addListener(this::onPopup);
+    }
+
+    private void onPopup(Observable observable) {
+        if (model.isDeleteChecking())
+            setPane();
     }
 
     private void setPane() {

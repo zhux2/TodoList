@@ -20,6 +20,10 @@
     -fx-fill: #333333;
 }
 
+.view_DeleteCheckBox TextFlow {
+    -fx-padding: 5px 0 0 0;
+}
+
 .view_Background Button {
     -fx-background-insets: 0;
     -fx-font-size: 20px;

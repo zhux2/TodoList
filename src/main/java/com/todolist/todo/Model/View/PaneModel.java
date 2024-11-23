@@ -22,6 +22,7 @@ public class PaneModel {
 
     private final ObjectProperty<PaneKind> overlayKind;
     private final BooleanProperty deleting;
+    private final BooleanProperty deleteChecking;
 
     private Task triggerTask;
 
@@ -31,6 +32,7 @@ public class PaneModel {
         overlayKind = new SimpleObjectProperty<>(PaneKind.PANE_NONE);
         paneFactory = new PaneFactory();
         deleting = new SimpleBooleanProperty(false);
+        deleteChecking = new SimpleBooleanProperty(false);
     }
 
     public ObjectProperty<PaneKind> overlayKindProperty() {
@@ -40,6 +42,7 @@ public class PaneModel {
     public void setOverlayKind(PaneKind paneKind) {
         overlayKind.set(paneKind);
         deleting.set(paneKind == PaneKind.PANE_DELETE || paneKind == PaneKind.PANE_DELETECHECK);
+        deleteChecking.set(paneKind == PaneKind.PANE_DELETECHECK);
     }
 
     public AnchorPane getOverlay() {
@@ -56,6 +59,14 @@ public class PaneModel {
 
     public boolean isDeleting() {
         return deleting.get();
+    }
+
+    public BooleanProperty deleteCheckingProperty() {
+        return deleteChecking;
+    }
+
+    public boolean isDeleteChecking() {
+        return deleteChecking.get();
     }
 
     public void setTriggerTask(Task task) {

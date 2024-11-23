@@ -5,17 +5,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
-
+<?import javafx.scene.text.TextFlow?>
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0"
             styleClass="view_Background" stylesheets="@DeleteCheckPane.css"
             xmlns="http://javafx.com/javafx/21.0.5" xmlns:fx="http://javafx.com/fxml/1">
-    <VBox layoutX="275.0" layoutY="282.0" prefHeight="150.0" prefWidth="300.0" styleClass="view_DeleteCheckBox"
-          AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="280.0">
-        <Text fx:id="promptText" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Task?"/>
+    <VBox layoutX="275.0" layoutY="282.0" prefHeight="150.0" prefWidth="300.0" styleClass="view_DeleteCheckBox" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="280.0">
+        <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
+            <Text fx:id="promptText" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Task?"/>
+        </TextFlow>
         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="view_BtnBox">
-            <Button fx:id="cancelBtn" mnemonicParsing="false" styleClass="btn_Cancel" text="Cancel"/>
-            <Button fx:id="deleteBtn" mnemonicParsing="false" styleClass="btn_Delete" text="Delete"/>
+            <Button fx:id="cancelBtn" mnemonicParsing="false" styleClass="btn_Cancel" text="Cancel" />
+            <Button fx:id="deleteBtn" mnemonicParsing="false" styleClass="btn_Delete" text="Delete" />
         </HBox>
     </VBox>
 </AnchorPane>

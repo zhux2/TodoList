@@ -3,6 +3,7 @@ package com.todolist.todo.Controller.ViewCtrl;
 import com.todolist.todo.Model.AppModel;
 import com.todolist.todo.Model.Task.Task;
 import com.todolist.todo.Model.Task.TaskManager;
+import com.todolist.todo.Model.Task.TaskTag;
 import com.todolist.todo.View.Cell.TaskCellFactory;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -16,6 +17,8 @@ import java.util.ResourceBundle;
 public class TwoColumnController extends ModifiableBaseController implements Initializable {
     @FXML
     private DatePicker calendar;
+    @FXML
+    private ComboBox<TaskTag> tagComboBox;
 
     @FXML
     private ListView<Task> finishedListView;
@@ -37,15 +40,38 @@ public class TwoColumnController extends ModifiableBaseController implements Ini
 
         taskManager.setDate(calendar.getValue());
 
-        unfinishedListView.setItems(taskManager.getTodoTaskList());
+        unfinishedListView.setItems(taskManager.getTodoShowList());
         unfinishedListView.setCellFactory(e -> new TaskCellFactory(model));
-        finishedListView.setItems(taskManager.getDoneTaskList());
+        finishedListView.setItems(taskManager.getDoneShowList());
         finishedListView.setCellFactory(e -> new TaskCellFactory(model));
     }
 
     private void initMainPane() {
         calendar.setValue(LocalDate.now());
         calendar.valueProperty().addListener(this::onCalendarChangeDate);
+
+        tagComboBox.getItems().addAll(TaskTag.values());
+        tagComboBox.setCellFactory(lv -> new ListCell<>() {
+            @Override
+            protected void updateItem(TaskTag item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.displayName());
+            }
+        });
+
+        tagComboBox.setButtonCell(new ListCell<>() {
+            @Override
+            protected void updateItem(TaskTag item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.displayName());
+            }
+        });
+
+        tagComboBox.setValue(TaskTag.NONE);
+
+        tagComboBox.setOnAction(actionEvent -> {
+            taskManager.setTag(tagComboBox.getValue());
+        });
     }
 
     /**

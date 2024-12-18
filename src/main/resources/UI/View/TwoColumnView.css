@@ -147,5 +147,28 @@
     -fx-max-height: 0;
 }
 
+.info_tagComboBox {
+    -fx-background-color: #c1caca;
+    -fx-padding: 0;
+    -fx-font-size: 16px;
+    -fx-font-family: "Serif";
+    -fx-pref-height: 30px;
+    -fx-min-height: 30px;
+    -fx-max-height: 30px;
+}
+
+/* 设置 ComboBox 下拉框中的选项样式 */
+.combo-box-popup .list-view {
+    -fx-background-color: #f4fdfd;   /* 下拉框背景颜色 */
+}
+
+.combo-box-popup .list-cell {
+    -fx-text-fill: #333333;          /* 选项文本颜色 */
+    -fx-font-size: 18px;       /* 选项字体大小 */
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: lightgray; /* 鼠标悬停时的背景颜色 */
+}
 
 /* .view_TaskList .list-cell */

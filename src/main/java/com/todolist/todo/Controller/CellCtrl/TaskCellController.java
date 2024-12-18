@@ -1,6 +1,7 @@
 package com.todolist.todo.Controller.CellCtrl;
 
 import com.todolist.todo.Model.Task.Task;
+import com.todolist.todo.Model.Task.TaskTag;
 import com.todolist.todo.Model.View.PaneModel;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -24,6 +25,8 @@ public class TaskCellController implements Initializable {
     private Text title;
     @FXML
     private Text ddlString;
+    @FXML
+    private Text tagString;
     @FXML
     private Text details;
     @FXML
@@ -111,6 +114,12 @@ public class TaskCellController implements Initializable {
                         () -> task.ddlProperty().getValue() == null ? "" : task.ddlProperty().getValue().format(formatter),
                         task.ddlProperty()
                 )
+        );
+
+        tagString.textProperty().bind(
+                Bindings.createStringBinding(
+                        () -> task.tagProperty().getValue() == TaskTag.NONE ?
+                                "" : "    " + task.tagProperty().getValue().displayName())
         );
 
         updateCheckBox(task.importantProperty().get());

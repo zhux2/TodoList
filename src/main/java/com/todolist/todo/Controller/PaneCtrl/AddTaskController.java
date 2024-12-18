@@ -3,6 +3,7 @@ package com.todolist.todo.Controller.PaneCtrl;
 import com.todolist.todo.Model.AppModel;
 import com.todolist.todo.Model.Task.Task;
 import com.todolist.todo.Model.Task.TaskPool;
+import com.todolist.todo.Model.Task.TaskTag;
 import com.todolist.todo.Model.View.PaneModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,6 +34,8 @@ public class AddTaskController implements Initializable {
     @FXML
     private CheckBox tagImportant;
     @FXML
+    private ComboBox<TaskTag> tagCombo;
+    @FXML
     private TextArea detailTextArea;
 
     public AddTaskController() {
@@ -62,6 +65,23 @@ public class AddTaskController implements Initializable {
          */
         ddlHour.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 23));
         ddlMinute.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 59, 1));
+
+        tagCombo.getItems().addAll(TaskTag.values());
+        tagCombo.setCellFactory(lv -> new javafx.scene.control.ListCell<>() {
+            @Override
+            protected void updateItem(TaskTag item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.displayName());
+            }
+        });
+
+        tagCombo.setButtonCell(new javafx.scene.control.ListCell<>() {
+            @Override
+            protected void updateItem(TaskTag item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.displayName());
+            }
+        });
     }
 
     private void resetPane() {
@@ -71,6 +91,7 @@ public class AddTaskController implements Initializable {
         titleTextField.setText("");
         detailTextArea.setText("");
         tagImportant.setSelected(false);
+        tagCombo.setValue(TaskTag.NONE);
     }
 
     private void onBtnBackFromAdd() {
@@ -82,7 +103,8 @@ public class AddTaskController implements Initializable {
                 titleTextField.getText(),
                 ddlDate.getValue().atTime(ddlHour.getValue(), ddlMinute.getValue()),
                 tagImportant.isSelected(),
-                detailTextArea.getText()
+                detailTextArea.getText(),
+                tagCombo.getValue()
         );
 
         taskPool.addNewTask(createdTask);

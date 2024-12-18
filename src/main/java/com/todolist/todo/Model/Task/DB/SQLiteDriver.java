@@ -1,6 +1,7 @@
 package com.todolist.todo.Model.Task.DB;
 
 import com.todolist.todo.Model.Task.Task;
+import com.todolist.todo.Model.Task.TaskTag;
 
 import java.sql.*;
 import java.time.Instant;
@@ -23,7 +24,8 @@ public class SQLiteDriver implements DataBaseDriver{
                     finishTime INTEGER DEFAULT 0,
                     isImportant INTEGER DEFAULT 0,
                     detail TEXT,
-                    isDone INTEGER DEFAULT 0
+                    isDone INTEGER DEFAULT 0,
+                    tag TEXT
                 );
                 """;
         try {
@@ -37,12 +39,13 @@ public class SQLiteDriver implements DataBaseDriver{
 
     @Override
     public void addTask(Task task) {
-        String sql = "INSERT INTO tasks (title, ddl, isImportant, detail) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO tasks (title, ddl, isImportant, detail, tag) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, task.titleProperty().get());
             pstmt.setLong(2, task.getDdl().toEpochSecond(ZoneOffset.UTC));
             pstmt.setBoolean(3, task.importantProperty().get());
             pstmt.setString(4, task.detailsProperty().get());
+            pstmt.setString(5, task.getTag().name());
             int id = pstmt.executeUpdate();
             task.setId(id);
 //            System.out.println("Task added.");
@@ -113,7 +116,8 @@ public class SQLiteDriver implements DataBaseDriver{
                         LocalDateTime.ofInstant(Instant.ofEpochSecond(res.getLong("finishTime")), ZoneOffset.UTC),
                         res.getBoolean("isImportant"),
                         res.getString("detail"),
-                        res.getBoolean("isDone")
+                        res.getBoolean("isDone"),
+                        TaskTag.valueOf(res.getString("tag"))
                 );
 
                 taskSet.add(task);

@@ -13,6 +13,7 @@ public class Task {
     private ObjectProperty<LocalDateTime> ddl;
     private ObjectProperty<LocalDateTime> finishTime;
     private BooleanProperty isImportant;
+    private ObjectProperty<TaskTag> tag;
     private StringProperty details;
     private BooleanProperty isDone;
 
@@ -28,8 +29,23 @@ public class Task {
         updateApproachState(LocalDateTime.now());
     }
 
+    public Task(int id, String title, LocalDateTime ddl, LocalDateTime finishTime, boolean isImportant, String details, boolean isDone, TaskTag tag) {
+        init(title, ddl, isImportant, details);
+        this.id = id;
+        this.isDone.set(isDone);
+        this.finishTime.set(finishTime);
+        this.tag.set(tag);
+        updateApproachState(LocalDateTime.now());
+    }
+
     public Task(String title, LocalDateTime ddl, boolean isImportant, String details) {
         init(title, ddl, isImportant, details);
+        updateApproachState(LocalDateTime.now());
+    }
+
+    public Task(String title, LocalDateTime ddl, boolean isImportant, String details, TaskTag tag) {
+        init(title, ddl, isImportant, details);
+        this.tag.set(tag);
         updateApproachState(LocalDateTime.now());
     }
 
@@ -41,6 +57,7 @@ public class Task {
         this.isDone = new SimpleBooleanProperty(false);
         this.isApproach = new SimpleBooleanProperty(false);
         this.finishTime = new SimpleObjectProperty<>();
+        this.tag = new SimpleObjectProperty<>(TaskTag.NONE);
     }
     
     public StringProperty titleProperty() {
@@ -93,6 +110,14 @@ public class Task {
 
     public LocalDate getDdlDate() {
         return ddl.getValue().toLocalDate();
+    }
+
+    public TaskTag getTag() {
+        return tag.get();
+    }
+
+    public ObjectProperty<TaskTag> tagProperty() {
+        return tag;
     }
 
     public void setTaskPool(TaskPool taskPool) {

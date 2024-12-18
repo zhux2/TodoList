@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="view_Background" stylesheets="@TimelineView.css"
-            xmlns="http://javafx.com/javafx/21.0.5" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.todolist.todo.Controller.ViewCtrl.TimelineController">
-   <children>
-      <Text layoutX="269.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="tmp_text" text="haven't done yet" />
-   </children>
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="view_Background" stylesheets="@GeneralView.css" xmlns="http://javafx.com/javafx/21.0.5" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.todolist.todo.Controller.ViewCtrl.TimelineController">
+   <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="670.0" prefWidth="425.0" styleClass="view_TaskArea" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <ListView fx:id="timelineListView" layoutX="98.0" layoutY="236.0" prefHeight="530.0" prefWidth="400.0" styleClass="view_TaskList" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="15.0" />
+   </AnchorPane>
 </AnchorPane>

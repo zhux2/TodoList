@@ -7,28 +7,20 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0"
-            prefWidth="180.0" stylesheets="@Menu.css" xmlns="http://javafx.com/javafx/21.0.5"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.todolist.todo.Controller.MenuController">
-   <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-         minWidth="-Infinity" prefHeight="750.0" prefWidth="180.0" styleClass="menu_MainBoard" stylesheets="@Menu.css"
-         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-         AnchorPane.topAnchor="0.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="180.0" stylesheets="@Menu.css" xmlns="http://javafx.com/javafx/21.0.5" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.todolist.todo.Controller.MenuController">
+   <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="180.0" styleClass="menu_MainBoard" stylesheets="@Menu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <AnchorPane prefHeight="730.0" prefWidth="160.0">
-         <VBox prefHeight="140.0" prefWidth="160.0" styleClass="menu_IconBox" stylesheets="@Menu.css"
-               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <FontAwesomeIconView glyphName="ANGELLIST" selectionFill="BLACK" size="35"/>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To-do List"/>
+         <VBox prefHeight="140.0" prefWidth="160.0" styleClass="menu_IconBox" stylesheets="@Menu.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <FontAwesomeIconView glyphName="ANGELLIST" selectionFill="BLACK" size="35" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To-do List" />
          </VBox>
-         <VBox prefHeight="400.0" prefWidth="160.0" styleClass="menu_NavigateBox" stylesheets="@Menu.css"
-               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
-            <Button fx:id="MyDayBtn" mnemonicParsing="false" text="My Day"/>
-            <Button fx:id="MyWeekBtn" mnemonicParsing="false" text="My Week"/>
-            <Button fx:id="ImportantBtn" mnemonicParsing="false" text="Important"/>
-            <Button fx:id="TimelineBtn" mnemonicParsing="false" text="Timeline"/>
+         <VBox prefHeight="400.0" prefWidth="160.0" styleClass="menu_NavigateBox" stylesheets="@Menu.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
+            <Button fx:id="DashBoardBtn" mnemonicParsing="false" text="Dashboard" />
+            <Button fx:id="MyDayBtn" mnemonicParsing="false" text="My Day" />
+            <Button fx:id="ImportantBtn" mnemonicParsing="false" text="Important" />
+            <Button fx:id="TimelineBtn" mnemonicParsing="false" text="Timeline" />
          </VBox>
       </AnchorPane>
    </VBox>
-   <Line endX="180.0" endY="80.0" startX="180.0" startY="670.0" styleClass="menu_DividerLine"
-         AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0"/>
+   <Line endX="180.0" endY="80.0" startX="180.0" startY="670.0" styleClass="menu_DividerLine" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
 </AnchorPane>

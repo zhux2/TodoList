@@ -4,25 +4,30 @@ import com.todolist.todo.Model.Task.DB.DataBaseDriver;
 import com.todolist.todo.Model.Task.DB.SQLiteDriver;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class TaskPool {
     private final Set<Task> todoTaskSet;
-    private final Map<LocalDate, Set<Task>> doneTaskMap;
+    private final Map<LocalDate, Boolean> doneTaskBitmap;
+    private final Map<LocalDate, Map<Task, Task>> doneTaskMap;
     private final DataBaseDriver database;
 
     private final Set<TaskUpdateObserver> updateObservers;
 
-    public TaskPool() {
+    public TaskPool(DataBaseDriver dataBaseDriver) {
         todoTaskSet = new HashSet<>();
         doneTaskMap = new HashMap<>();
-        database = new SQLiteDriver();
+        doneTaskBitmap = new HashMap<>();
+        database = dataBaseDriver;
         todoTaskSet.addAll(database.selectAllTodoTasks());
         for (Task t: todoTaskSet) {
             t.setTaskPool(this);
         }
 
         updateObservers = new HashSet<>();
+
+        startApproachChecker();
     }
 
     public void registerObserver(TaskUpdateObserver observer) {
@@ -42,21 +47,51 @@ public class TaskPool {
     }
 
     public void getDoneTasks(List<Task> tasks, LocalDate date) {
-        if (doneTaskMap.get(date) == null) {
+        if (doneTaskBitmap.get(date) == null) {
             Set<Task> doneTasks = database.selectDoneTasks(date);
+            Map<Task, Task> newDoneMap = new HashMap<>();
             for (Task t: doneTasks) {
                 t.setTaskPool(this);
+                newDoneMap.put(t, t);
             }
-            doneTaskMap.put(date, doneTasks);
+            doneTaskMap.put(date, newDoneMap);
+            doneTaskBitmap.put(date, true);
+        }
+        else if (!doneTaskBitmap.get(date)) {
+            Set<Task> doneTasks = database.selectDoneTasks(date);
+            for (Task t: doneTasks) {
+                if (!doneTaskMap.get(date).containsKey(t)) {
+                    t.setTaskPool(this);
+                    doneTaskMap.get(date).put(t, t);
+                }
+            }
+            doneTaskBitmap.put(date, true);
         }
 
-        tasks.addAll(doneTaskMap.get(date));
+        tasks.addAll(doneTaskMap.get(date).keySet());
+    }
+
+    public void getRecentDoneTasks(List<Task> tasks, LocalDate startDate, LocalDate endDate) {
+        Set<Task> recentDoneTasks = database.selectRecentDoneTasks(startDate, endDate);
+        for (Task t : recentDoneTasks) {
+            LocalDate ddlDate = t.getDdlDate();
+            if (doneTaskBitmap.get(ddlDate) == null) {
+                doneTaskMap.put(ddlDate, new HashMap<>());
+                doneTaskBitmap.put(ddlDate, false);
+            }
+
+            if (!doneTaskMap.get(ddlDate).containsKey(t)) {
+                t.setTaskPool(this);
+                doneTaskMap.get(ddlDate).put(t, t);
+            }
+            tasks.add(doneTaskMap.get(ddlDate).get(t));
+        }
     }
 
     public void addNewTask(Task task) {
+        database.addTask(task);
         task.setTaskPool(this);
         todoTaskSet.add(task);
-        database.addTask(task);
 
         for (TaskUpdateObserver observer : updateObservers) {
             if (observer.isRelevant(task))
@@ -87,7 +122,8 @@ public class TaskPool {
 
         if (task.done()) {
             todoTaskSet.remove(task);
-            doneTaskMap.get(task.getDdlDate()).add(task);
+            // may have problem
+            doneTaskMap.get(task.getDdlDate()).put(task, task);
         }
         else {
             doneTaskMap.get(task.getDdlDate()).remove(task);
@@ -106,5 +142,22 @@ public class TaskPool {
 
     public void modifiedTask(Task task) {
         // TODO - implement me
+    }
+
+    private void startApproachChecker() {
+        Timer timer = new Timer(true);
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                checkApproachingTasks();
+            }
+        }, 0, 60000);
+    }
+
+    private void checkApproachingTasks() {
+        LocalDateTime now = LocalDateTime.now();
+        for (Task task : todoTaskSet) {
+            task.updateApproachState(now);
+        }
     }
 }

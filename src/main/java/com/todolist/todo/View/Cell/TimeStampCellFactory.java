@@ -1,27 +1,19 @@
 package com.todolist.todo.View.Cell;
 
-import com.todolist.todo.Controller.CellCtrl.TaskCellController;
+import com.todolist.todo.Controller.CellCtrl.TimeStampCellController;
 import com.todolist.todo.Model.Task.Task;
-import com.todolist.todo.Model.View.PaneModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.ListCell;
 
 import java.io.IOException;
 
-public class TaskCellFactory extends ListCell<Task> {
-    /**
-     * lazy load: avoid loading fxml every time
-     */
+public class TimeStampCellFactory extends ListCell<Task> {
     private FXMLLoader loader;
     private Node graphic;
-    private TaskCellController controller;
+    private TimeStampCellController controller;
 
-    private final PaneModel model;
-
-    public TaskCellFactory(PaneModel model) {
-        this.model = model;
-    }
+    public TimeStampCellFactory() { }
 
     @Override
     protected void updateItem(Task task, boolean empty) {
@@ -31,18 +23,14 @@ public class TaskCellFactory extends ListCell<Task> {
             setGraphic(null);
         }
         else {
-//            if (controller != null && task == controller.getTask()) {
-////                System.out.println("no need to update");
-//                return;
-//            }
             if (loader == null) {
-                loader = new FXMLLoader(getClass().getResource("/UI/Cell/TaskCell.fxml"));
-                controller = new TaskCellController(task, model);
+                loader = new FXMLLoader(getClass().getResource("/UI/Cell/TimeStampCell.fxml"));
+                controller = new TimeStampCellController(task);
                 loader.setController(controller);
                 try {
                     graphic = loader.load();
                 } catch (IOException e) {
-                    System.out.println("Error loading task-cell fxml: " + e.getMessage());
+                    System.out.println("Error loading timestamp-cell fxml: " + e.getMessage());
                 }
             }
             assert controller != null;

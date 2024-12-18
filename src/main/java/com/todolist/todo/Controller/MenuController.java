@@ -13,7 +13,7 @@ public class MenuController implements Initializable {
     private Button MyDayBtn;
 
     @FXML
-    private Button MyWeekBtn;
+    private Button DashBoardBtn;
 
     @FXML
     private Button ImportantBtn;
@@ -34,7 +34,7 @@ public class MenuController implements Initializable {
         MyDayBtn.setOnAction(event -> onBtnMyDay());
         TimelineBtn.setOnAction(event -> onBtnTimeline());
         ImportantBtn.setOnAction(event -> onBtnImportant());
-        MyWeekBtn.setOnAction(event -> onBtnMyWeek());
+        DashBoardBtn.setOnAction(event -> onBtnMyWeek());
     }
 
     private void onBtnMyDay() {
@@ -46,7 +46,7 @@ public class MenuController implements Initializable {
     }
 
     private void onBtnMyWeek() {
-        AppModel.getInstance().setCurrentCenterPane(AppModel.CenterPaneKind.CPANE_MYWEEK);
+        AppModel.getInstance().setCurrentCenterPane(AppModel.CenterPaneKind.CPANE_DASHBOARD);
     }
 
     private void onBtnImportant() {

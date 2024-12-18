@@ -51,6 +51,7 @@ public class TaskManager implements TaskUpdateObserver{
 
     @Override
     public void updateNewTask(Task task) {
+        System.out.println("today manager: receive");
         todoTaskList.add(task);
     }
 

@@ -4,6 +4,7 @@ import com.todolist.todo.Model.Task.Task;
 import com.todolist.todo.Model.View.PaneModel;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,6 +33,10 @@ public class TaskCellController implements Initializable {
 
     private Task task;
 
+    private ChangeListener<Boolean> importantListener = null;
+
+    private ChangeListener<Boolean> approachListener = null;
+
     private final PaneModel model;
 
     public TaskCellController(Task task, PaneModel model) {
@@ -44,7 +49,6 @@ public class TaskCellController implements Initializable {
         setStaticData();
         bindTask();
 
-        task.importantProperty().addListener(this::onImportantChange);
         checkBox.setOnAction(event -> onCheckBoxSelected());
         taskCellPane.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getClickCount() == 2) {
@@ -72,13 +76,21 @@ public class TaskCellController implements Initializable {
         return task;
     }
 
-    public void updateTask(Task task) {
+    /**
+     * JavaFX ListView will reuse Task Cell by binding different task to the
+     * same Task Cell
+     * update controller when ListView reuse this cell for different task
+     */
+    public void bindNewTask(Task task) {
         if (task == this.task) {
             setStaticData();
-//            System.out.println("TaskCellController: no update " + task.getTitle());
             return;
         }
-//        System.out.println("TaskCellController: update " + task.getTitle());
+        // remove old listeners
+        assert (this.task != null && importantListener != null && approachListener != null);
+        this.task.importantProperty().removeListener(importantListener);
+        this.task.approachProperty().removeListener(approachListener);
+
         this.task = task;
         setStaticData();
         bindTask();
@@ -102,11 +114,35 @@ public class TaskCellController implements Initializable {
         );
 
         updateCheckBox(task.importantProperty().get());
+        updateHighlight(task.isApproach());
+
+        // add listeners
+        importantListener = this::onImportantChange;
+        task.importantProperty().addListener(importantListener);
+
+        approachListener = this::onApproachChange;
+        task.approachProperty().addListener(approachListener);
     }
 
     private void onImportantChange(ObservableValue<? extends Boolean> isImportant, Boolean oldVal, Boolean newVal) {
         if (newVal == oldVal) return;
         updateCheckBox(newVal);
+    }
+
+    private void onApproachChange(ObservableValue<? extends Boolean> isApproach, Boolean oldVal, Boolean newVal) {
+        if (newVal == oldVal) return;
+        updateHighlight(newVal);
+    }
+
+    private void updateHighlight(boolean isApproach) {
+        if (isApproach) {
+            taskCellPane.getStyleClass().remove("taskCellNormal");
+            taskCellPane.getStyleClass().add("taskCellHighlight");
+        }
+        else {
+            taskCellPane.getStyleClass().remove("taskCellHighlight");
+            taskCellPane.getStyleClass().add("taskCellNormal");
+        }
     }
 
     private void updateCheckBox(boolean isImportant) {

@@ -1,5 +1,7 @@
 package com.todolist.todo.Model;
 
+import com.todolist.todo.Model.Task.DB.DataBaseDriver;
+import com.todolist.todo.Model.Task.DB.SQLiteDriver;
 import com.todolist.todo.Model.Task.TaskPool;
 import com.todolist.todo.Model.View.PaneModel;
 import com.todolist.todo.View.ViewFactory;
@@ -11,7 +13,7 @@ public class AppModel {
 
     public enum CenterPaneKind {
         CPANE_MYDAY,
-        CPANE_MYWEEK,
+        CPANE_DASHBOARD,
         CPANE_IMPORTANT,
         CPANE_TIMELINE
     }
@@ -33,11 +35,23 @@ public class AppModel {
         return appModel;
     }
 
-    private AppModel() {
-        taskPool = new TaskPool();
+    public static synchronized void setupAppModel(DataBaseDriver database) {
+//        assert (appModel == null);
+        appModel = new AppModel(database);
+    }
+
+    private AppModel(DataBaseDriver database) {
+        taskPool = new TaskPool(database);
         viewFactory = new ViewFactory();
-        currentCenterPane = new SimpleObjectProperty<>(CenterPaneKind.CPANE_MYDAY);
-        paneModel = new PaneModel();
+        currentCenterPane = new SimpleObjectProperty<>(CenterPaneKind.CPANE_DASHBOARD);
+        paneModel = new PaneModel(this);
+    }
+
+    private AppModel() {
+        taskPool = new TaskPool(new SQLiteDriver());
+        viewFactory = new ViewFactory();
+        currentCenterPane = new SimpleObjectProperty<>(CenterPaneKind.CPANE_DASHBOARD);
+        paneModel = new PaneModel(this);
     }
 
     public ObjectProperty<CenterPaneKind> getCurrentCenterPane() {
@@ -45,20 +59,24 @@ public class AppModel {
     }
 
     public void setCurrentCenterPane(CenterPaneKind newCenterPane) {
+        if (paneModel.hasPane()) {
+            paneModel.blinkPane();
+            return;
+        }
         currentCenterPane.set(newCenterPane);
+    }
+
+    public CenterPaneKind currentCenterPaneKind() {
+        return currentCenterPane.get();
     }
 
     public AnchorPane getSwitchedAnchorPane() {
         return switch (currentCenterPane.get()) {
             case CPANE_MYDAY -> viewFactory.getMyDayView();
-            case CPANE_MYWEEK -> viewFactory.getMyDayView();
+            case CPANE_DASHBOARD -> viewFactory.getDashboardView();
             case CPANE_IMPORTANT -> viewFactory.getMyDayView();
             case CPANE_TIMELINE -> viewFactory.getTimeLineView();
         };
-    }
-
-    public ViewFactory getViewFactory() {
-        return viewFactory;
     }
 
     public TaskPool getTaskPool() {

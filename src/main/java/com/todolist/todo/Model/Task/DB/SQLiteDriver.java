@@ -7,9 +7,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class SQLiteDriver implements DataBaseDriver{
@@ -22,6 +20,7 @@ public class SQLiteDriver implements DataBaseDriver{
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     title TEXT NOT NULL,
                     ddl INTEGER NOT NULL,
+                    finishTime INTEGER DEFAULT 0,
                     isImportant INTEGER DEFAULT 0,
                     detail TEXT,
                     isDone INTEGER DEFAULT 0
@@ -41,7 +40,7 @@ public class SQLiteDriver implements DataBaseDriver{
         String sql = "INSERT INTO tasks (title, ddl, isImportant, detail) VALUES (?, ?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, task.titleProperty().get());
-            pstmt.setLong(2, task.ddlProperty().getValue().toEpochSecond(ZoneOffset.UTC));
+            pstmt.setLong(2, task.getDdl().toEpochSecond(ZoneOffset.UTC));
             pstmt.setBoolean(3, task.importantProperty().get());
             pstmt.setString(4, task.detailsProperty().get());
             int id = pstmt.executeUpdate();
@@ -73,14 +72,25 @@ public class SQLiteDriver implements DataBaseDriver{
     public Set<Task> selectDoneTasks(LocalDate date) {
         long startOfDay = date.atStartOfDay(ZoneOffset.UTC).toEpochSecond();
         long endOfDay = date.plusDays(1).atStartOfDay(ZoneOffset.UTC).toEpochSecond() - 1;
-
         String sql = "SELECT * FROM tasks WHERE isDone = 1 AND ddl BETWEEN ? AND ?";
+        return selectByTime(startOfDay, endOfDay, sql);
+    }
+
+    @Override
+    public Set<Task> selectRecentDoneTasks(LocalDate startDate, LocalDate endDate) {
+        long startTime = startDate.atStartOfDay(ZoneOffset.UTC).toEpochSecond();
+        long endTime = endDate.plusDays(1).atStartOfDay(ZoneOffset.UTC).toEpochSecond() - 1;
+        String sql = "SELECT * FROM tasks WHERE isDone = 1 AND finishTime BETWEEN ? AND ?";
+        return selectByTime(startTime, endTime, sql);
+    }
+
+    private Set<Task> selectByTime(long startTime, long endTime, String sql) {
         PreparedStatement pstmt = null;
 
         try {
             pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, startOfDay);
-            pstmt.setLong(2, endOfDay);
+            pstmt.setLong(1, startTime);
+            pstmt.setLong(2, endTime);
         } catch (SQLException e) {
             System.out.println("Error selecting tasks: " + e.getMessage());
         }
@@ -100,6 +110,7 @@ public class SQLiteDriver implements DataBaseDriver{
                         res.getInt("id"),
                         res.getString("title"),
                         LocalDateTime.ofInstant(Instant.ofEpochSecond(res.getLong("ddl")), ZoneOffset.UTC),
+                        LocalDateTime.ofInstant(Instant.ofEpochSecond(res.getLong("finishTime")), ZoneOffset.UTC),
                         res.getBoolean("isImportant"),
                         res.getString("detail"),
                         res.getBoolean("isDone")
@@ -115,10 +126,11 @@ public class SQLiteDriver implements DataBaseDriver{
 
     @Override
     public void updateDoneMark(Task task) {
-        String sql = "UPDATE tasks SET isDone = ? WHERE id = ?";
+        String sql = "UPDATE tasks SET isDone = ?, finishTime = ? WHERE id = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setBoolean(1, task.done());
-            pstmt.setInt(2, task.getId());
+            pstmt.setLong(2, task.getFinishTime().toEpochSecond(ZoneOffset.UTC));
+            pstmt.setInt(3, task.getId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error updating tasks: " + e.getMessage());

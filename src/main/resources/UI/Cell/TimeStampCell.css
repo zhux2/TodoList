@@ -1,0 +1,36 @@
+.taskStampCell {
+    -fx-background-color: #f4fdfd;
+    -fx-background-radius: 15px;
+}
+
+.titleFlow {
+    -fx-alignment: center-left;
+    -fx-padding: 8px 5px 5px 5px;
+}
+
+.titleFlow Text {
+    -fx-font-size: 24px;
+    -fx-font-family: "Serif";
+    -fx-fill: #333333;
+}
+
+.ddlFlow {
+    -fx-alignment: right;
+    -fx-padding: 8px 5px 5px 5px;
+}
+
+.ddlFlow Text {
+    -fx-font-size: 24px;
+    -fx-font-family: "Serif";
+    -fx-fill: #333333;
+}
+
+.shape_line {
+    -fx-stroke: #cc4f34;
+    -fx-stroke-width: 2px;
+}
+
+.shape_circle {
+    -fx-fill: #cc4f34;
+    -fx-stroke: transparent;
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+
+<AnchorPane prefHeight="70.0" prefWidth="792.0" stylesheets="@TimeStampCell.css" xmlns="http://javafx.com/javafx/21.0.5"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane layoutX="64.0" layoutY="-71.0" prefHeight="60.0" prefWidth="776.0" styleClass="taskStampCell"
+                AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0"
+                AnchorPane.topAnchor="5.0">
+        <TextFlow layoutX="42.0" layoutY="9.0" prefHeight="42.0" prefWidth="230.0" styleClass="ddlFlow"
+                  textAlignment="RIGHT" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="20.0"
+                  AnchorPane.topAnchor="9.0">
+            <Text fx:id="ddlText" strokeType="OUTSIDE" strokeWidth="0.0" text="2024 11-01"/>
+        </TextFlow>
+        <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="30.0" radius="5.0" stroke="BLACK" strokeType="INSIDE"
+                styleClass="shape_circle"/>
+        <Line endY="46.0" layoutX="280.0" layoutY="7.0" styleClass="shape_line"/>
+        <TextFlow layoutX="305.0" layoutY="9.0" prefHeight="42.0" prefWidth="450.0" styleClass="titleFlow"
+                  AnchorPane.bottomAnchor="9.0" AnchorPane.topAnchor="9.0">
+            <Text fx:id="titleText" strokeType="OUTSIDE" strokeWidth="0.0" text="Title"/>
+        </TextFlow>
+    </AnchorPane>
+</AnchorPane>

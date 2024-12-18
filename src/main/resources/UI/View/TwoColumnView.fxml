@@ -7,17 +7,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0"
-            styleClass="view_Background" stylesheets="@TwoColumnView.css"
-            xmlns="http://javafx.com/javafx/21.0.5" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.todolist.todo.Controller.ViewCtrl.TwoColumnController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="view_Background" stylesheets="@TwoColumnView.css" xmlns="http://javafx.com/javafx/21.0.5" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.todolist.todo.Controller.ViewCtrl.TwoColumnController">
    <HBox layoutX="234.0" layoutY="240.0" prefHeight="650.0" prefWidth="850.0" styleClass="view_HboxTaskArea" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
       <AnchorPane prefHeight="600.0" prefWidth="405.0" styleClass="view_TaskArea">
          <Text layoutX="170.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unfinished" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="25.0" />
-         <ListView fx:id="unfinishedListView" fixedCellSize="150.0" layoutX="13.0" layoutY="69.0" prefHeight="530.0" prefWidth="400.0" styleClass="view_TaskList" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" />
+         <ListView fx:id="unfinishedListView" fixedCellSize="150.0" layoutX="13.0" layoutY="69.0" prefHeight="530.0" prefWidth="400.0" styleClass="view_TaskList" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" />
       </AnchorPane>
       <AnchorPane prefHeight="570.0" prefWidth="405.0" styleClass="view_TaskArea">
-         <ListView fx:id="finishedListView" layoutX="13.0" layoutY="63.0" prefHeight="530.0" prefWidth="400.0" styleClass="view_TaskList" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="13.0" />
+         <ListView fx:id="finishedListView" layoutX="13.0" layoutY="63.0" prefHeight="530.0" prefWidth="400.0" styleClass="view_TaskList" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" />
          <Text layoutX="170.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Finished" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="25.0" />
       </AnchorPane>
    </HBox>

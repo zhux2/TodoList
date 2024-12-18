@@ -22,6 +22,11 @@ public interface DataBaseDriver {
     public Set<Task> selectDoneTasks(LocalDate date);
 
     /**
+     * @return a set of already been done tasks whose finish time is within date
+     */
+    public Set<Task> selectRecentDoneTasks(LocalDate startDate, LocalDate endDate);
+
+    /**
      * Update the isDone field of database.
      * @param task a task whose isDone field changes
      */

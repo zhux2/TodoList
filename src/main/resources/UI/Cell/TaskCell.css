@@ -1,6 +1,15 @@
 .taskCellPane {
+}
+
+.taskCellNormal {
     -fx-background-color: #f4fdfd;
     -fx-background-radius: 15px;
+}
+
+.taskCellHighlight {
+    -fx-background-color: #f4fdfd;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(238, 108, 77, 0.67), 15, 0.5, 0, -1);
 }
 
 .taskCellPane CheckBox .box{

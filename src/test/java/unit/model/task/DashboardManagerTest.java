@@ -149,28 +149,20 @@ class DashboardManagerTest {
     void testUpdateMarkDoneTask1() {
         setupTaskPool();
         dashboardManager = new DashboardManager(mockTaskPool);
-        List<Task> taskList = dashboardManager.getTodoTaskList();
 
-        Task modifiedTask = null;
-        for (Task t : taskList) {
-            if (!t.withinDate(LocalDate.now())) {
-                modifiedTask = t;
-                break;
-            }
-        }
+        Task modifiedTask = dashboardManager.getTodoTaskList()
+                .stream()
+                .filter(t -> !t.withinDate(LocalDate.now()))
+                .findFirst().orElse(null);
         assert modifiedTask != null;
         modifiedTask.markDone(true);
 
         checkUpdateMarkDone(modifiedTask, -1, 0);
 
-        List<Task> todoList = dashboardManager.getTodoTaskList();
-        modifiedTask = null;
-        for (Task t : todoList) {
-            if (t.withinDate(LocalDate.now())) {
-                modifiedTask = t;
-                break;
-            }
-        }
+        modifiedTask = dashboardManager.getTodoTaskList()
+                .stream()
+                .filter(t -> t.withinDate(LocalDate.now()))
+                .findFirst().orElse(null);
         assert modifiedTask != null;
         modifiedTask.markDone(true);
 
@@ -181,29 +173,20 @@ class DashboardManagerTest {
     void testUpdateMarkDoneTask2() {
         setupTaskPool();
         dashboardManager = new DashboardManager(mockTaskPool);
-        List<Task> taskList = dashboardManager.getDoneTaskList();
 
-        Task modifiedTask = null;
-        for (Task t : taskList) {
-            if (!t.withinDate(LocalDate.now())) {
-                modifiedTask = t;
-                break;
-            }
-        }
+        Task modifiedTask = dashboardManager.getDoneTaskList()
+                .stream()
+                .filter(t -> !t.withinDate(LocalDate.now()))
+                .findFirst().orElse(null);
         assert modifiedTask != null;
         modifiedTask.markDone(false);
 
         checkUpdateMarkDone(modifiedTask, 1, 0);
 
-
-        List<Task> todoList = dashboardManager.getTodoTaskList();
-        modifiedTask = null;
-        for (Task t : todoList) {
-            if (t.withinDate(LocalDate.now())) {
-                modifiedTask = t;
-                break;
-            }
-        }
+        modifiedTask = dashboardManager.getDoneTaskList()
+                .stream()
+                .filter(t -> t.withinDate(LocalDate.now()))
+                .findFirst().orElse(null);
         assert modifiedTask != null;
         modifiedTask.markDone(false);
 
@@ -241,26 +224,24 @@ class DashboardManagerTest {
         setupTaskPool();
         dashboardManager = new DashboardManager(mockTaskPool);
 
-        Task deleteTask = null;
-        List<Task> taskList = dashboardManager.getTodoTaskList();
-        for (Task t : taskList) {
-            if (!t.withinDate(LocalDate.now())) {
-                deleteTask = t;
-                break;
-            }
-        }
-        assert deleteTask != null;
+        Task deleteTask = dashboardManager.getTodoTaskList()
+                .stream()
+                .filter(t -> !t.withinDate(LocalDate.now()))
+                .findFirst().orElse(null);
+        assert (deleteTask != null);
         checkUpdateDeletedTask(deleteTask, -1, 0);
+    }
 
-        deleteTask = null;
-        taskList = dashboardManager.getTodoTaskList();
-        for (Task t : taskList) {
-            if (t.withinDate(LocalDate.now())) {
-                deleteTask = t;
-                break;
-            }
-        }
-        assert deleteTask != null;
+    @Test
+    void testUpdateDeletedTask3() {
+        setupTaskPool();
+        dashboardManager = new DashboardManager(mockTaskPool);
+
+        Task deleteTask = dashboardManager.getTodoTaskList()
+                .stream()
+                .filter(t -> t.withinDate(LocalDate.now()))
+                .findFirst().orElse(null);
+        assert (deleteTask != null);
         checkUpdateDeletedTask(deleteTask, -1, -1);
     }
 

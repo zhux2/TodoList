@@ -72,6 +72,8 @@ public class TaskPool {
     }
 
     public void getRecentDoneTasks(List<Task> tasks, LocalDate startDate, LocalDate endDate) {
+        if (startDate.isAfter(endDate)) return;
+
         Set<Task> recentDoneTasks = database.selectRecentDoneTasks(startDate, endDate);
         for (Task t : recentDoneTasks) {
             LocalDate ddlDate = t.getDdlDate();

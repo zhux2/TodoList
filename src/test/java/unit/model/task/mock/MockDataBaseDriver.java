@@ -137,27 +137,27 @@ public class MockDataBaseDriver implements DataBaseDriver {
     }
 
     public static void setupDB(MockDataBaseDriver mockDatabase) {
-        mockDatabase.longDoneTask = new Task(
+        mockDatabase.recentDoneTask1 = new Task(
                 mockDatabase.uuid(),
-                "task a",
+                "Done Today",
                 LocalDate.now().atTime(23, 59),
                 LocalDate.now().atTime(12, 0),
                 false, "details", true
         );
-        mockDatabase.add(mockDatabase.longDoneTask);
+        mockDatabase.add(mockDatabase.recentDoneTask1);
 
-        mockDatabase.recentDoneTask1 = new Task(
+        mockDatabase.longDoneTask = new Task(
                 mockDatabase.uuid(),
-                "task aa",
+                "Done 10 Days Ago",
                 LocalDate.now().atTime(23, 59),
                 LocalDate.now().minusDays(10).atTime(12, 0),
                 false, "details", true
         );
-        mockDatabase.add(mockDatabase.recentDoneTask1);
+        mockDatabase.add(mockDatabase.longDoneTask);
 
         mockDatabase.todayTodoTask = new Task(
                 mockDatabase.uuid(),
-                "task b",
+                "Due Today",
                 LocalDate.now().atTime(12, 0),
                 LocalDateTime.now(),
                 false, "details", false
@@ -166,7 +166,7 @@ public class MockDataBaseDriver implements DataBaseDriver {
 
         mockDatabase.recentDoneTask2 = new Task(
                 mockDatabase.uuid(),
-                "task c",
+                "Done 2 Days Ago",
                 LocalDate.now().minusDays(1).atTime(23, 59),
                 LocalDate.now().minusDays(2).atTime(12, 0),
                 false, "details", true
@@ -175,7 +175,7 @@ public class MockDataBaseDriver implements DataBaseDriver {
 
         mockDatabase.delayTodoTask = new Task(
                 mockDatabase.uuid(),
-                "task d",
+                "Delay",
                 LocalDate.now().minusDays(1).atTime(12, 0),
                 LocalDateTime.now(),
                 false, "details", false

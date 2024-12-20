@@ -307,14 +307,14 @@ class TaskPoolTest {
         verify(mockObserver, times(1)).updateDeletedTask(taskToDelete);
     }
 
-    static class ConsistencyChecker {
+    public static class ConsistencyChecker {
         Map<Task, Task> taskMap;
 
         ConsistencyChecker() {
             taskMap = new HashMap<>();
         }
 
-        void check(List<Task> taskList) {
+        public void check(List<Task> taskList) {
             for (Task t : taskList) {
                 if (taskMap.containsKey(t)) {
                     assertTrue(taskMap.get(t) == t);
@@ -323,6 +323,20 @@ class TaskPoolTest {
                     taskMap.put(t, t);
                 }
             }
+        }
+
+        public Task getTask(int index) {
+            if (taskMap.isEmpty()) return null;
+
+            index = index % taskMap.size();
+            int i = 0;
+            for (Task t : taskMap.keySet()) {
+                if (i == index) {
+                    return t;
+                }
+                i += 1;
+            }
+            return null;
         }
     }
 }

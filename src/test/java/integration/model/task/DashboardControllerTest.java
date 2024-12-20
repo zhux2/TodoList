@@ -5,6 +5,7 @@ import com.todolist.todo.Model.Task.Task;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.Node;
 import javafx.stage.Stage;
@@ -14,7 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.framework.junit5.Start;
 import org.testfx.util.WaitForAsyncUtils;
 import unit.model.task.mock.MockDataBaseDriver;
 
@@ -32,7 +32,6 @@ public class DashboardControllerTest extends ApplicationTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        FxToolkit.cleanupStages();
         FxToolkit.registerPrimaryStage();
         mockDatabase = new MockDataBaseDriver();
         MockDataBaseDriver.setupDB(mockDatabase);
@@ -50,12 +49,13 @@ public class DashboardControllerTest extends ApplicationTest {
 
 
     @Test
-    void testAddTask() {
+    void testAddTask() throws InterruptedException {
         int expectTodoNum = Integer.parseInt(todoNum.getText()) + 1;
         int expectDueNum = Integer.parseInt(dueTodayNum.getText()) + 1;
 
         Button addTaskBtn = lookup("#addTaskBtn").queryButton();
         clickOn(addTaskBtn);
+        Thread.sleep(1000);
 
         TextField titleTextField = lookup("#titleTextField").queryAs(TextField.class);
         TextArea detailTextArea = lookup("#detailTextArea").queryAs(TextArea.class);
@@ -66,6 +66,7 @@ public class DashboardControllerTest extends ApplicationTest {
 
         Button createBtn = lookup("#createBtn").queryButton();
         clickOn(createBtn);
+        Thread.sleep(1000);
 
         assertEquals(expectTodoNum, Integer.parseInt(todoNum.getText()));
         assertEquals(expectDueNum, Integer.parseInt(dueTodayNum.getText()));
@@ -77,28 +78,36 @@ public class DashboardControllerTest extends ApplicationTest {
         assertTrue(taskFound, "Task not found in the list");
     }
 
-//    @Test
-//    void testDeleteTaskIntegration() {
-//        // Step 1: 添加两个任务
-//        clickOn(taskInputField).write("Task 1");
-//        clickOn(addButton);
-//        clickOn(taskInputField).write("Task 2");
-//        clickOn(addButton);
-//
-//        // Step 2: 选择第一个任务并删除
-//        interact(() -> taskListView.getSelectionModel().select(0)); // 选择第一个任务
-//        Button deleteButton = lookup("#deleteButton").queryAs(Button.class);
-//        clickOn(deleteButton);
-//
-//        // Step 3: 验证任务是否从列表中删除
-//        assertEquals(1, taskListView.getItems().size());
-//        assertEquals("Task 2", taskListView.getItems().get(0));
-//    }
-//
+    @Test
+    void testDeleteTask() throws InterruptedException {
+        int expectTodoNum = Integer.parseInt(todoNum.getText()) - 1;
+        Thread.sleep(1000);
+
+        Button deleteTaskBtn = lookup("#deleteTaskBtn").queryButton();
+        clickOn(deleteTaskBtn);
+        Thread.sleep(1000);
+
+        interact(() -> allTodoListView.getSelectionModel().select(0));
+        Task deleteTask = allTodoListView.getItems().get(0);
+        Node selectedCell = allTodoListView.lookup(".list-cell:selected");
+        Button deleteBtn = (Button) selectedCell.lookup("#deleteBtn");
+        clickOn(deleteBtn);
+        Thread.sleep(1000);
+
+        AnchorPane overlay = lookup("#subPane").queryAs(AnchorPane.class);
+        Button deleteCheck = (Button) overlay.lookup("#deleteBtn");
+        clickOn(deleteCheck);
+        Thread.sleep(1000);
+
+        assertEquals(expectTodoNum, Integer.parseInt(todoNum.getText()));
+
+        assertFalse(allTodoListView.getItems().contains(deleteTask));
+    }
+
     @Test
     void testMarkDone() throws InterruptedException {
         Thread.sleep(1000);
-        interact(() -> allTodoListView.getSelectionModel().select(0)); // 选择任务
+        interact(() -> allTodoListView.getSelectionModel().select(0));
         Task doneTask = allTodoListView.getItems().get(0);
         Node selectedCell = allTodoListView.lookup(".list-cell:selected");
         CheckBox checkBox = (CheckBox) selectedCell.lookup("#checkBox");

@@ -1,9 +1,7 @@
 package com.todolist.todo.Model.Task;
 
-import javafx.beans.Observable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ObservableIntegerValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
@@ -82,7 +80,6 @@ public class DashboardManager implements TaskUpdateObserver{
 
     @Override
     public void updateMarkDoneTask(Task task) {
-        System.out.println("update mark done");
         if (task.done()) {
             todoTaskList.remove(task);
             doneTaskList.add(task);

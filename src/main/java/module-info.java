@@ -17,6 +17,7 @@ module com.todolist.todo {
     exports com.todolist.todo;
     exports com.todolist.todo.Controller;
     exports com.todolist.todo.Controller.ViewCtrl;
+    exports com.todolist.todo.Model;
     exports com.todolist.todo.Model.Task;
     exports com.todolist.todo.Model.Task.DB;
     exports com.todolist.todo.Model.View;

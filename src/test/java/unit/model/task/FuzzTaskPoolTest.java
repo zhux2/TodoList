@@ -13,16 +13,19 @@ import java.util.List;
 
 public class FuzzTaskPoolTest {
     private TaskPool taskPool;
-    private MockDataBaseDriver mockDatabase;
     private FuzzEngine fuzzEngine;
+    private MockDataBaseDriver mockDatabase;
     private TaskPoolTest.ConsistencyChecker checker;
 
     @BeforeEach
     void setup() {
+        fuzzEngine = new FuzzEngine("output.txt");
+    }
+
+    void setupFuzz() {
         mockDatabase = new MockDataBaseDriver();
         MockDataBaseDriver.setupDB(mockDatabase);
-        taskPool = new TaskPool(mockDatabase);
-        fuzzEngine = new FuzzEngine("output.txt");
+        taskPool = new TaskPool(mockDatabase, false);
         checker = new TaskPoolTest.ConsistencyChecker();
     }
 
@@ -32,6 +35,7 @@ public class FuzzTaskPoolTest {
     }
 
     void fuzzTestTaskPool() {
+        setupFuzz();
         int operationNum = fuzzEngine.randInt(5, 40);
 
         while (operationNum > 0) {
@@ -55,19 +59,20 @@ public class FuzzTaskPoolTest {
                 false,
                 fuzzEngine.randString(100)
         );
-        fuzzEngine.log("AddNewTask - New Task title[" + newTask.getTitle() + "] ddl[" + newTask.getDdl().toString() + "]");
+        fuzzEngine.log("AddNewTask - New Task " + taskInfo(newTask));
         taskPool.addNewTask(newTask);
     }
 
     void opDeleteTask() {
         Task deleteTask = checker.getTask(fuzzEngine.randInt(0, 1000));
-        fuzzEngine.log("DeleteTask - Delete Task title[" + deleteTask.getTitle() + "] ddl[" + deleteTask.getDdl().toString() + "]");
+
+        fuzzEngine.log("DeleteTask - Delete Task " + taskInfo(deleteTask));
         taskPool.deleteTask(deleteTask);
     }
 
     void opMarkDoneTask() {
         Task modifiedTask = checker.getTask(fuzzEngine.randInt(0, 1000));
-        fuzzEngine.log("MarkDoneTask - Modified Task title[" + modifiedTask.getTitle() + "] ddl[" + modifiedTask.getDdl().toString() + "]");
+        fuzzEngine.log("MarkDoneTask - Modified Task " + taskInfo(modifiedTask));
         modifiedTask.markDone(!modifiedTask.done());
         taskPool.markDoneTask(modifiedTask);
     }
@@ -102,5 +107,31 @@ public class FuzzTaskPoolTest {
         fuzzEngine.log("GetRecentDoneTasks - start[" + start.toString() + "] end[" + end.toString() + "]");
         taskPool.getRecentDoneTasks(taskList, start, end);
         checker.check(taskList);
+    }
+
+    String taskInfo(Task task) {
+        if (task == null) {
+            return "[null]";
+        }
+        return "title[" + task.getTitle() + "] ddl[" + task.getDdl().toString() + "]";
+    }
+
+    @Test
+    void recurrent() {
+        setupFuzz();
+        // GetAllTodoTasks
+        List<Task> taskList = new ArrayList<>();
+        taskPool.getAllTodoTasks(taskList);
+        checker.check(taskList);
+
+        // GetTodoTasks - date[2022-05-21]
+        taskList.clear();
+        taskPool.getTodoTasks(taskList, LocalDate.of(2022, 5, 21));
+        checker.check(taskList);
+
+        // MarkDoneTask - Modified Task title[Delay] ddl[2024-12-19T12:00]
+        Task modifiedTask = mockDatabase.delayTodoTask;
+        modifiedTask.markDone(!modifiedTask.done());
+        taskPool.markDoneTask(modifiedTask);
     }
 }

@@ -4,6 +4,7 @@ plugins {
   id 'org.javamodularity.moduleplugin' version '1.8.12'
   id 'org.openjfx.javafxplugin' version '0.0.13'
   id 'org.beryx.jlink' version '2.25.0'
+//  id 'jacoco'
 }
 
 group 'com.todolist'
@@ -50,8 +51,16 @@ dependencies {
   testImplementation('org.mockito:mockito-core:5.6.0')
 }
 
+//jacocoTestReport {
+//  reports {
+//    xml.required = true
+//    html.required = true
+//  }
+//}
+
 test {
-useJUnitPlatform()
+  useJUnitPlatform()
+//  finalizedBy jacocoTestReport
 }
 
 jlink {

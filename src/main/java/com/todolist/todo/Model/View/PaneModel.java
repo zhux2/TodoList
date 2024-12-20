@@ -3,13 +3,10 @@ package com.todolist.todo.Model.View;
 import com.todolist.todo.Model.AppModel;
 import com.todolist.todo.Model.Task.Task;
 import com.todolist.todo.View.PaneFactory;
-import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 

@@ -10,6 +10,7 @@ import unit.model.task.mock.MockDataBaseDriver;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -123,6 +124,7 @@ public class DashboardTaskTest {
         Task modifiedTask = mockDatabase.delayTodoTask;
         checkUpdateMarkDone(modifiedTask, true, -1, 0);
 
+        taskPool.getDoneTasks(new ArrayList<>(), LocalDate.now());
         modifiedTask = mockDatabase.longDoneTask;
         checkUpdateMarkDone(modifiedTask, false, 1, 1);
 

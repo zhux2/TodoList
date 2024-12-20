@@ -30,6 +30,19 @@ public class TaskPool {
         startApproachChecker();
     }
 
+    public TaskPool(DataBaseDriver dataBaseDriver, boolean timerStart) {
+        todoTaskSet = new HashSet<>();
+        doneTaskMap = new HashMap<>();
+        doneTaskBitmap = new HashMap<>();
+        database = dataBaseDriver;
+        todoTaskSet.addAll(database.selectAllTodoTasks());
+        for (Task t: todoTaskSet) {
+            t.setTaskPool(this);
+        }
+
+        updateObservers = new HashSet<>();
+    }
+
     public void registerObserver(TaskUpdateObserver observer) {
         updateObservers.add(observer);
     }
@@ -102,7 +115,7 @@ public class TaskPool {
     }
 
     public void deleteTask(Task task) {
-        assert task != null;
+        if (task == null) return;
 
         if (task.done()) {
             doneTaskMap.get(task.getDdlDate()).remove(task);
@@ -124,7 +137,10 @@ public class TaskPool {
 
         if (task.done()) {
             todoTaskSet.remove(task);
-            // may have problem
+            if (!doneTaskMap.containsKey(task.getDdlDate())) {
+                doneTaskMap.put(task.getDdlDate(), new HashMap<>());
+                doneTaskBitmap.put(task.getDdlDate(), false);
+            }
             doneTaskMap.get(task.getDdlDate()).put(task, task);
         }
         else {

@@ -157,7 +157,6 @@ public class TaskCellController implements Initializable {
     }
 
     private void onCheckBoxSelected() {
-        System.out.println("check box selected");
         task.markDone(checkBox.isSelected());
     }
 

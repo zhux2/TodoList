@@ -51,7 +51,6 @@ public class PaneModel {
     }
 
     public void setOverlayKind(PaneKind paneKind) {
-        System.out.println("set overlay kind" + paneKind.toString());
         if (paneKind == overlayKind) return;
 
         overlayKind = paneKind;
@@ -68,7 +67,6 @@ public class PaneModel {
     }
 
     public AnchorPane getOverlay() {
-        System.out.println("get overlay pane");
         return switch (overlayKind) {
             case PANE_ADDTASK -> paneFactory.getAddTaskPane();
             case PANE_DELETECHECK -> paneFactory.getDeleteCheckPane();

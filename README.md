@@ -26,8 +26,14 @@ Start the application:
 
 ### Screenshots
 
+##### Dashboard View
+![dashboard](screenshots/DashboardView.png)
+
 ##### My Day View
 ![myday](screenshots/MyDayView.png)
 
 ##### Add Task
 ![addtask](screenshots/AddTask.png)
+
+##### Timeline View
+![timeline](screenshots/TimelineView.png)
